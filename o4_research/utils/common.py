@@ -14,12 +14,14 @@ def invert_transformations(equations, x_vars, y_vars):
     if len(equations) != len(x_vars) or len(x_vars) != len(y_vars):
         raise ValueError("Количество уравнений, x и y переменных должно совпадать")
 
-    # solutions = []
     solutions = solve(tuple(equations), tuple(x_vars))
-    for i in range(len(solutions)):
-        solutions[i] = simplify(solutions[i])
 
-    return solutions[1]
+    best_solutions = []
+    for i in range(len(x_vars)):
+        best_expr = min((sol[i] for sol in solutions), key=lambda expr: len(str(expr)))
+        best_solutions.append(simplify(best_expr))
+
+    return tuple(best_solutions)
 
 
 # from sympy import symbols, Eq, sin, exp, log
