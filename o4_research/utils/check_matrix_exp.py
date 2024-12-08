@@ -2,6 +2,8 @@ from sympy import exp
 from sympy.core import Add, Mul, Derivative, Pow
 from sympy import log, diff
 
+# TODO: не работает в некоторых случаях, см o3_test_inverse_true.py
+
 def check_factor(factor, coords) -> bool:
     lfactor = log(factor)
     first_derivatives = [diff(lfactor, coord) for coord in coords]
